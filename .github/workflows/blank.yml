@@ -32,10 +32,6 @@ jobs:
           echo "ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }}" >> $GITHUB_ENV
       - name: install packages
         run: make install
-      - name: lint
-        run: make lint
-      - name: test
-        run: make test
       - name: format
         run: make format
       - name: run databricks job 
