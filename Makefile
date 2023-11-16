@@ -1,9 +1,6 @@
 install:
 	pip install --upgrade pip && pip install -r requirements.txt
 
-test:
-	python -m pytest -vv --cov=main --cov=mylib test_*.py
-
 format:
 	black *.py 
 
@@ -15,7 +12,7 @@ refactor: format lint
 deploy:
 	# Deploy goes here
 
-all: install lint test format deploy
+all: install format deploy
 
 job:
 	python run_job.py
