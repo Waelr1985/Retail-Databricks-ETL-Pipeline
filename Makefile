@@ -4,6 +4,9 @@ install:
 format:
 	black *.py 
 
+lint:
+	#Lint goes here
+
 container-lint:
 	docker run --rm -i hadolint/hadolint < Dockerfile
 
