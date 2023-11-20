@@ -8,6 +8,9 @@ https://youtu.be/hgSqiw_qPxA
 
 This project is designed to perform ETL (Extract, Transform, Load) operations using Databricks notebooks. It utilizes Delta Lake for efficient data storage, Spark SQL for data transformations, proper error handling, data validation, and visualization of the transformed data.
 
+![image](https://github.com/nogibjj/Sjg80-Databricks_ETL_Pipeline/assets/142270941/1ba5a4c6-7fdb-4add-97c0-6e9fbbe18096)
+![image](https://github.com/nogibjj/Sjg80-Databricks_ETL_Pipeline/assets/142270941/a636a0d8-5e07-4623-a159-c842a6aa638a)
+
 ## Dependencies
 
 - Python 3.x
@@ -58,6 +61,9 @@ The `load()` function reads the extracted data, performs schema inference, split
 This script uses Apache Spark (PySpark) to load a CSV file from the FileStore, perform data transformation, split it into two DataFrames, assign unique IDs, and write the transformed data into Delta tables.
 
 - `load`: Reads a CSV file using PySpark, splits the columns into two halves, creates two DataFrames, assigns unique IDs, and stores them as Delta tables (`obesity_data1_delta` and `obesity_data2_delta`).
+
+![image](https://github.com/nogibjj/Sjg80-Databricks_ETL_Pipeline/assets/142270941/be8d748b-12c4-434f-a39c-1499384f1bf1)
+
 
 ### 3. Visualization `query_viz.py`
 The `query_transform()` and `viz()` functions in `visualization.py` perform Spark SQL queries and generate visualizations to analyze average age, height, and weight by gender.
