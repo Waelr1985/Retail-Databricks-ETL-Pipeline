@@ -1,5 +1,9 @@
 # Sjg80-Databricks_ETL_Pipeline
 
+🎥 Video Demo
+The following YouTube link shows a clear, concise walkthrough and demonstration of the Databricks_ETL_Pipeline
+https://youtu.be/hgSqiw_qPxA
+
 ## Overview
 
 This project is designed to perform ETL (Extract, Transform, Load) operations using Databricks notebooks. It utilizes Delta Lake for efficient data storage, Spark SQL for data transformations, proper error handling, data validation, and visualization of the transformed data.
