@@ -1,86 +1,40 @@
-# Sjg80-Databricks_ETL_Pipeline
-
-🎥 Video Demo
-The following YouTube link shows a clear, concise walkthrough and demonstration of the Databricks_ETL_Pipeline
-https://youtu.be/hgSqiw_qPxA
+# 🛍️ Retail Databricks ETL Pipeline
 
 ## Overview
+This project demonstrates an **end-to-end ETL pipeline** using **Databricks + PySpark** on a retail dataset (Sample Superstore).  
+It follows the **Medallion Architecture** (Bronze → Silver → Gold) and showcases how raw sales data can be transformed into business-ready analytics.
 
-This project is designed to perform ETL (Extract, Transform, Load) operations using Databricks notebooks. It utilizes Delta Lake for efficient data storage, Spark SQL for data transformations, proper error handling, data validation, and visualization of the transformed data.
+## Architecture
+- **Bronze Layer** → Ingest raw retail sales data from CSV into Delta Lake.
+- **Silver Layer** → Clean and standardize fields (dates, null handling, renaming).
+- **Gold Layer** → Aggregate sales & profit by Category and Region for reporting.
 
-![image](https://github.com/nogibjj/Sjg80-Databricks_ETL_Pipeline/assets/142270941/1ba5a4c6-7fdb-4add-97c0-6e9fbbe18096)
-![image](https://github.com/nogibjj/Sjg80-Databricks_ETL_Pipeline/assets/142270941/a636a0d8-5e07-4623-a159-c842a6aa638a)
+## Tech Stack
+- **Databricks Community Edition**
+- **PySpark**
+- **Delta Lake**
+- **Databricks SQL / Dashboards**
 
-## Dependencies
+## Pipeline Flow
+1. **Ingestion (Bronze)** → Load `/FileStore/tables/superstore.csv` into `bronze_superstore`.
+2. **Transformation (Silver)** → Clean and normalize dataset into `silver_superstore`.
+3. **Aggregation (Gold)** → Build `gold_sales_summary` for BI dashboards.
 
-- Python 3.x
-- Databricks platform
-- Spark SQL
-- Matplotlib
-- Requests library
-- Dotenv library
+## Example Analytics
+- Sales by Category & Region
+- Profit contribution by Category
+- Regional profitability trends
 
-## Project Structure
+## How to Run
+1. Clone this repo into Databricks Repos or import notebooks manually.
+2. Upload `superstore.csv` to `/FileStore/tables/`.
+3. Run notebooks in order:
+   - `01_bronze_ingest`
+   - `02_silver_transform`
+   - `03_gold_analytics`
+4. Query results with Databricks SQL and create dashboards.
 
-- `etl_process.py`: Contains code to perform ETL operations.
-- `visualization.py`: Includes code for data visualization.
-- `README.md`: Project documentation.
-
-## Running the Program
-
-1. Clone the repository locally.
-2. Set up the required environment variables using a `.env` file.
-3. Open Databricks and create notebooks for `etl_process.py` and `visualization.py`.
-4. Run `etl_process.py` to perform ETL operations.
-5. Run `visualization.py` to generate visualizations.
-
-### Environment Variables
-
-- `SERVER_HOSTNAME`: Databricks server hostname.
-- `ACCESS_TOKEN`: Access token for Databricks API authentication.
-
-## ETL Process
-
-Let's break down each code snippet and its functionality:
-
-
-### Extraction `extract.py`
-
-The `extract()` function in `etl_process.py` fetches data from a specified URL and stores it in the FileStore.
-This Python script extracts a file from a given URL and stores it in the Databricks FileStore using Databricks REST APIs.
-
-- `perform_query`: A utility function that performs HTTP POST requests to the Databricks API.
-- `mkdirs`, `create`, `add_block`, `close`: Functions to interact with Databricks File System (DBFS) via REST API.
-- `put_file_from_url`: Downloads a file from a given URL, encodes it in base64, and uploads it to the specified DBFS path.
-- `extract`: Downloads a CSV file from a URL, stores it in the FileStore at a specific path, and returns the file path.
-
-### 2. Transformation and Loading `transform_load.py`
-
-The `load()` function reads the extracted data, performs schema inference, splits it into two DataFrames, assigns unique IDs, and stores them as Delta tables (`obesity_data1_delta` and `obesity_data2_delta`).
-
-This script uses Apache Spark (PySpark) to load a CSV file from the FileStore, perform data transformation, split it into two DataFrames, assign unique IDs, and write the transformed data into Delta tables.
-
-- `load`: Reads a CSV file using PySpark, splits the columns into two halves, creates two DataFrames, assigns unique IDs, and stores them as Delta tables (`obesity_data1_delta` and `obesity_data2_delta`).
-
-![image](https://github.com/nogibjj/Sjg80-Databricks_ETL_Pipeline/assets/142270941/be8d748b-12c4-434f-a39c-1499384f1bf1)
-
-
-### 3. Visualization `query_viz.py`
-The `query_transform()` and `viz()` functions in `visualization.py` perform Spark SQL queries and generate visualizations to analyze average age, height, and weight by gender.
-
-This script uses Spark SQL to perform data querying and generates visualizations using Matplotlib based on the transformed data.
-
-- `query_transform`: Executes a custom SQL query on the loaded data (assumed to be loaded as a DataFrame named `obesity_data`) to calculate average age, height, and weight by gender.
-- `viz`: Generates a bar plot visualization showing the average age, height, and weight by gender using Matplotlib.
-
-Overall, these scripts perform a comprehensive ETL process, starting from data extraction, transforming and loading data into Delta tables using PySpark, and finally, querying and visualizing the transformed data using Spark SQL and Matplotlib, respectively.
-
-![image](https://github.com/nogibjj/Sjg80-Databricks_ETL_Pipeline/assets/142270941/237bb68f-3c8f-4f50-9783-a0f85433257b)
-
-## Recommendations
-
-Based on the data analysis:
-
-- There's a notable difference in average height between genders, indicating potential areas for targeted health programs.
-- The average weight distribution might suggest a need for gender-specific dietary guidance.
-
+## Extensions
+- Add **streaming ingestion** (Auto Loader).
+- Integrate **MLflow** for sales forecasting.
+- Add **alerting** for low-profit categories.
